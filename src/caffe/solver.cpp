@@ -261,6 +261,17 @@ void Solver<Dtype>::Step(int iters) {
         }
       }
     }
+
+	// GPUÀäÈ´Ò»ÏÂ XinMiao 20151020
+	const bool gpu_rest_interval = param_.gpu_rest_interval() && iter_ % param_.gpu_rest_interval() == 0;
+	if (gpu_rest_interval) {
+		int gpu_rest_time = param_.gpu_rest_time() * 1000;
+		LOG_IF(INFO, Caffe::root_solver()) << "    GPU have a cooling for " << gpu_rest_time << " MS.";
+		clock_t now = clock();
+		while (clock() - now < gpu_rest_time);
+	}
+
+
     for (int i = 0; i < callbacks_.size(); ++i) {
       callbacks_[i]->on_gradients_ready();
     }
