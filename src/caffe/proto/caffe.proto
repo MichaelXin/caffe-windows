@@ -666,6 +666,8 @@ message ImageDataParameter {
   // data.
   optional bool mirror = 6 [default = false];
   optional string root_folder = 12 [default = ""];
+  // record_shuffled_file
+  optional string record_shuffled_file = 13 [default = ""];
 }
 
 message InfogainLossParameter {

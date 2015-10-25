@@ -47,6 +47,21 @@ void ImageDataLayer<Dtype>::DataLayerSetUp(const vector<Blob<Dtype>*>& bottom,
     const unsigned int prefetch_rng_seed = caffe_rng_rand();
     prefetch_rng_.reset(new Caffe::RNG(prefetch_rng_seed));
     ShuffleImages();
+	/////////////////////////////////////////////////////// Michael Xin 20151023
+	// Record shuffled image list to file 
+	std::string record_shuffled_file = this->layer_param_.image_data_param().record_shuffled_file();
+	if (record_shuffled_file.compare("") != 0) {
+		ofstream out_file(record_shuffled_file); 
+		std::pair<std::string, int> line;
+		LOG(INFO) << "Record shuffle data to file";
+		for (vector<std::pair<std::string, int>>::iterator iter = lines_.begin(); iter != lines_.end(); ++iter) {
+			line = *iter;
+			// int index = iter - lines_.begin();
+			// cout << "############" << ": " << line.first << " " << line.second << endl;
+			out_file << line.first << " " << line.second << endl;
+		}
+	} 
+	///////////////////////////////////////////////////////
   }
   LOG(INFO) << "A total of " << lines_.size() << " images.";
 

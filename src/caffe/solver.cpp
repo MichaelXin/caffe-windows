@@ -262,7 +262,8 @@ void Solver<Dtype>::Step(int iters) {
       }
     }
 
-	// GPUÀäÈ´Ò»ÏÂ XinMiao 20151020
+	/////////////////////////////////////////////////////// Michael Xin 20151023
+	// GPU have a cooling after gpu_rest_interval() iters
 	const bool gpu_rest_interval = param_.gpu_rest_interval() && iter_ % param_.gpu_rest_interval() == 0;
 	if (gpu_rest_interval) {
 		int gpu_rest_time = param_.gpu_rest_time() * 1000;
@@ -270,7 +271,7 @@ void Solver<Dtype>::Step(int iters) {
 		clock_t now = clock();
 		while (clock() - now < gpu_rest_time);
 	}
-
+	///////////////////////////////////////////////////////
 
     for (int i = 0; i < callbacks_.size(); ++i) {
       callbacks_[i]->on_gradients_ready();

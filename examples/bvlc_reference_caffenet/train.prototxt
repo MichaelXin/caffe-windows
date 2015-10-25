@@ -18,6 +18,7 @@ layer {
     # batch_size: 61
     batch_size: 40
     shuffle: true
+    record_shuffled_file: "E:/sources/C++/Caffe-windows/caffe-windows/examples/bvlc_reference_caffenet/train_imagenet_shuffled_196bck.txt"
     new_height: 250
     new_width: 250
   }
@@ -49,6 +50,7 @@ layer {
     source: "E:/sources/C++/Caffe-windows/caffe-windows/examples/bvlc_reference_caffenet/test_casia_list_label_30c.txt"
     batch_size: 8
     shuffle: true
+    record_shuffled_file: "E:/sources/C++/Caffe-windows/caffe-windows/examples/bvlc_reference_caffenet/test_imagenet_shuffled_196bck.txt"
     new_height: 250
     new_width: 250
   }
